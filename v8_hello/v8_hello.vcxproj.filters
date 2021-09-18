@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="源文件\v8_vm">
+      <UniqueIdentifier>{c283d182-9c4e-4a37-a13c-9a7b7e70fc38}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\until">
+      <UniqueIdentifier>{6ab32057-5e95-416d-9d5a-f3fecbe670f0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\v8_vm\v8context">
+      <UniqueIdentifier>{01035cd4-0886-43cf-bf84-18b827f22358}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\v8_vm\v8time">
+      <UniqueIdentifier>{026beda3-4e72-47a0-8f29-b18935ff52cb}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="v8_hello.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="v8vm.cpp">
+      <Filter>源文件\v8_vm</Filter>
+    </ClCompile>
+    <ClCompile Include="file_until.cpp">
+      <Filter>源文件\until</Filter>
+    </ClCompile>
+    <ClCompile Include="v8env.cpp">
+      <Filter>源文件\v8_vm</Filter>
+    </ClCompile>
+    <ClCompile Include="text_encode.cpp">
+      <Filter>源文件\until</Filter>
+    </ClCompile>
+    <ClCompile Include="v8context.cpp">
+      <Filter>源文件\v8_vm\v8context</Filter>
+    </ClCompile>
+    <ClCompile Include="v8time.cpp">
+      <Filter>源文件\v8_vm\v8time</Filter>
+    </ClCompile>
+    <ClCompile Include="TimeoutTask.cpp">
+      <Filter>源文件\v8_vm\v8time</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="v8vm.h">
+      <Filter>源文件\v8_vm</Filter>
+    </ClInclude>
+    <ClInclude Include="file_until.h">
+      <Filter>源文件\until</Filter>
+    </ClInclude>
+    <ClInclude Include="v8env.h">
+      <Filter>源文件\v8_vm</Filter>
+    </ClInclude>
+    <ClInclude Include="text_encode.h">
+      <Filter>源文件\until</Filter>
+    </ClInclude>
+    <ClInclude Include="v8context.h">
+      <Filter>源文件\v8_vm\v8context</Filter>
+    </ClInclude>
+    <ClInclude Include="v8time.h">
+      <Filter>源文件\v8_vm\v8time</Filter>
+    </ClInclude>
+    <ClInclude Include="TimeoutTask.h">
+      <Filter>源文件\v8_vm\v8time</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
