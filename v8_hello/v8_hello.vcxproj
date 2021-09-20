@@ -156,8 +156,10 @@
     <ClCompile Include="file_until.cpp" />
     <ClCompile Include="text_encode.cpp" />
     <ClCompile Include="TimeoutTask.cpp" />
-    <ClCompile Include="v8env.cpp" />
     <ClCompile Include="v8context.cpp" />
+    <ClCompile Include="v8env.cpp" />
+    <ClCompile Include="v8inject.cpp" />
+    <ClCompile Include="v8print.cpp" />
     <ClCompile Include="v8time.cpp" />
     <ClCompile Include="v8vm.cpp" />
     <ClCompile Include="v8_hello.cpp" />
@@ -165,9 +167,11 @@
   <ItemGroup>
     <ClInclude Include="text_encode.h" />
     <ClInclude Include="TimeoutTask.h" />
+    <ClInclude Include="v8context.h" />
     <ClInclude Include="v8env.h" />
     <ClInclude Include="file_until.h" />
-    <ClInclude Include="v8context.h" />
+    <ClInclude Include="v8inject.h" />
+    <ClInclude Include="v8print.h" />
     <ClInclude Include="v8time.h" />
     <ClInclude Include="v8vm.h" />
   </ItemGroup>

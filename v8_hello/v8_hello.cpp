@@ -16,7 +16,7 @@ int main(int argc, char* argv[])
 	
 	// auto r = vm.script("'Hello' + ', World!'").exec<string>();
 	// printf("%s\n", r.c_str());
-	auto r = vm.load("d://v8_js//p.js").exec<string>();
+	auto r = vm.load("p.js").exec<string>();
 	printf("%s\n", r.c_str());
 
     std::cout << "Hello World!\n";

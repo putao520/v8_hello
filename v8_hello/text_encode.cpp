@@ -14,7 +14,8 @@ bool detectTextEncoding(const char* data, int32_t len, char** detected)
 {
     UCharsetDetector* csd;
     const UCharsetMatch** csm;
-    int32_t match, matchCount = 0;
+    // int32_t match, matchCount = 0;
+    int32_t matchCount = 0;
 
     UErrorCode status = U_ZERO_ERROR;
 

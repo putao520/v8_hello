@@ -3,13 +3,12 @@
 #include <iostream>
 #include <include/libplatform/libplatform.h>
 #include <include/v8.h>
-#include <queue>
+
 using namespace v8;
 using namespace std;
 
-class v8context {
+class v8inject {
 public:
-	static Local<Context> New(Isolate* isolate);
+	static void Bind(Local<ObjectTemplate>, Local<String>);
 private:
-	Isolate* isolate;
 };

@@ -2,6 +2,9 @@
 #include "TimeoutTask.h"
 #include <functional>
 #include "v8callback.h"
+#include "v8context.h"
+
+v8time* global_v8t = nullptr;
 
 atomic<unsigned int> taskId(0);
 extern unique_ptr<Platform> g_default_platform;
@@ -15,7 +18,7 @@ v8time::v8time(Isolate* isolate):
 v8time::~v8time() {
 }
 
-void v8time::setupSetTimeout(Local<ObjectTemplate> global) {
+void v8time::setup(Local<ObjectTemplate> global) {
 	// 构造全局对象
 	global->Set(
 		String::NewFromUtf8(_isolate, "setTimeout", NewStringType::kNormal).ToLocalChecked(),
@@ -23,49 +26,50 @@ void v8time::setupSetTimeout(Local<ObjectTemplate> global) {
 	);
 }
 
-// 注意内存泄漏
 v8time* v8time::New(Isolate* isolate) {
-	v8time* v8t = new v8time(isolate);
-	return v8t;
+	return global_v8t ? global_v8t : new v8time(isolate);
 }
 /**
 * SetTimeout
 */
-bool runSetTimeout(TimeoutTask* pTask) {
-	// 该处函数上下文无效
-	Isolate* isolate = pTask->getIsolate();
-	auto runner = g_default_platform->GetForegroundTaskRunner(isolate);
-
-	unique_ptr<TimeoutTask> _task = make_unique<TimeoutTask>(isolate);
-
-	runner->PostTask(move(_task));
-
-	return true;
-}
 
 unsigned int SetTimeoutImpl(Isolate* isolate, const FunctionCallbackInfo<v8::Value>& args) {
 	
 	if (args.Length() == 0 || !args[0]->IsFunction()) return 0;
 	taskId++;
-	Local<Function> callback = args[0].As<Function>();
-	Local<Context> context = isolate->GetCurrentContext();
 
 	// 此处上下文没有问题
 	double delay = 0.0;
 	if (args.Length() >= 2) {
 		if (args[1]->IsNumber()) {
-			delay = args[1]->NumberValue(context).ToChecked();
+			delay = args[1]->NumberValue(isolate->GetCurrentContext()).ToChecked();
 		}
 	}
 
-	TimeoutTask* pTimeroutTask = new TimeoutTask(isolate);
-	pTimeroutTask->setTask([pTimeroutTask]() {
-		runSetTimeout(pTimeroutTask);
+	Persistent<Function, CopyablePersistentTraits<Function>> pfn(isolate, args[0].As<Function>());
+
+	unique_ptr<TimeoutTask> pTask = make_unique<TimeoutTask>(isolate);
+	pTask->setTask([isolate, pfn]() {
+		Isolate::Scope isolate_scope(isolate);
+		{
+			HandleScope handle_scope(isolate);
+			Local<Context> context = isolate->GetCurrentContext();
+			if (!context.IsEmpty()) {
+				Context::Scope context_scope(context);
+				{
+					TryCatch trycatch(isolate);
+					Local<Function> callback = pfn.Get(isolate);
+					callback->CallAsFunction(context, Undefined(isolate), 0, nullptr);
+					pfn.~Persistent();
+				}
+			}
+		}
+
 		});
 
-	unique_ptr<TimeoutTask> pTask(pTimeroutTask);
-
-	g_default_platform.get()->CallDelayedOnWorkerThread(move(pTask), delay / static_cast<double>(1000.0));
+	g_default_platform
+		->GetForegroundTaskRunner(isolate)
+		->PostDelayedTask(move(pTask), delay / static_cast<double>(1000.0));
 
 	return taskId;
 }

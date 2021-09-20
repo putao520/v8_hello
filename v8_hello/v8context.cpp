@@ -1,20 +1,18 @@
 #include "v8context.h"
+#include "v8inject.h"
+#include "v8time.h"
+#include "v8print.h"
 
-int x = 1000;
+#define SETUP_FUNC(type, isolate) type::New(isolate)->setup(global);
 
-void Getter(Local<String> property,
-	const PropertyCallbackInfo<Value>& info) {
-	info.GetReturnValue().Set(x);
-}
+Local<Context> v8context::New(Isolate* isolate) {
+	// 填充对象
+	Local<ObjectTemplate> global = v8::ObjectTemplate::New(isolate);
+	v8inject::Bind(global, String::NewFromUtf8(isolate, "Inject", NewStringType::kInternalized).ToLocalChecked());
 
-void Setter(Local<String> property, Local<Value> value,
-	const PropertyCallbackInfo<void>& info) {
-	x = value->Int32Value(
-		info.GetIsolate()->GetCurrentContext()
-	).ToChecked();
-}
+	// 填充函数
+	SETUP_FUNC(v8time, isolate)
+	SETUP_FUNC(v8print, isolate)
 
-void v8context::Bind(Local<ObjectTemplate> global, Local<String> name) {
-	// 构造全局对象
-	global->SetAccessor(name, Getter, Setter);
+	return Context::New(isolate, NULL, global);
 }

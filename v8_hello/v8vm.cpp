@@ -3,8 +3,6 @@
 #include "text_encode.h"
 #include "type_traits"
 #include "v8env.h"
-#include "v8context.h"
-#include "v8time.h"
 
 using namespace std::filesystem;
 v8vm::v8vm(): _script(nullptr), _isolate(buildIsolate()) {}
@@ -12,17 +10,6 @@ v8vm::v8vm(): _script(nullptr), _isolate(buildIsolate()) {}
 v8vm::v8vm(const v8vm& that) : _script(that._script), _isolate(buildIsolate()) {}
 
 v8vm::v8vm(const v8vm&& that) noexcept : _script(that._script), _isolate(that._isolate) {}
-
-Local<Context> v8vm::buildGlobalContext() {
-	// ÃÓ≥‰∂‘œÛ
-	Local<ObjectTemplate> global = v8::ObjectTemplate::New(_isolate);
-	v8context::Bind(global, String::NewFromUtf8(_isolate, "Context", NewStringType::kInternalized).ToLocalChecked());
-
-	// ÃÓ≥‰∫Ø ˝
-	v8time::New(_isolate)->setupSetTimeout(global);
-
-	return Context::New(_isolate, NULL, global);
-}
 
 Isolate* v8vm::buildIsolate() {
 	v8env::New();

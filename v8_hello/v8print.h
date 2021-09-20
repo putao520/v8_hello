@@ -3,13 +3,18 @@
 #include <iostream>
 #include <include/libplatform/libplatform.h>
 #include <include/v8.h>
-#include <queue>
+
 using namespace v8;
 using namespace std;
 
-class v8context {
+class v8print {
 public:
-	static Local<Context> New(Isolate* isolate);
+	v8print(Isolate* isolate);
+	~v8print();
+	void setup(Local<ObjectTemplate>);
+
+	static v8print* New(Isolate* isolate);
+
 private:
-	Isolate* isolate;
+	Isolate* _isolate;
 };

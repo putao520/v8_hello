@@ -19,11 +19,17 @@
     <Filter Include="源文件\until">
       <UniqueIdentifier>{6ab32057-5e95-416d-9d5a-f3fecbe670f0}</UniqueIdentifier>
     </Filter>
-    <Filter Include="源文件\v8_vm\v8context">
-      <UniqueIdentifier>{01035cd4-0886-43cf-bf84-18b827f22358}</UniqueIdentifier>
-    </Filter>
     <Filter Include="源文件\v8_vm\v8time">
       <UniqueIdentifier>{026beda3-4e72-47a0-8f29-b18935ff52cb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\v8_vm\v8inject">
+      <UniqueIdentifier>{01035cd4-0886-43cf-bf84-18b827f22358}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\v8_vm\v8context">
+      <UniqueIdentifier>{9e1fbdaf-b8af-4c63-9a4a-95febf48f982}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\v8_vm\v8print">
+      <UniqueIdentifier>{24826826-01a5-4d38-9602-2f559f3ec5f3}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -42,14 +48,20 @@
     <ClCompile Include="text_encode.cpp">
       <Filter>源文件\until</Filter>
     </ClCompile>
-    <ClCompile Include="v8context.cpp">
-      <Filter>源文件\v8_vm\v8context</Filter>
+    <ClCompile Include="v8inject.cpp">
+      <Filter>源文件\v8_vm\v8inject</Filter>
     </ClCompile>
     <ClCompile Include="v8time.cpp">
       <Filter>源文件\v8_vm\v8time</Filter>
     </ClCompile>
     <ClCompile Include="TimeoutTask.cpp">
       <Filter>源文件\v8_vm\v8time</Filter>
+    </ClCompile>
+    <ClCompile Include="v8context.cpp">
+      <Filter>源文件\v8_vm\v8context</Filter>
+    </ClCompile>
+    <ClCompile Include="v8print.cpp">
+      <Filter>源文件\v8_vm\v8print</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -65,14 +77,20 @@
     <ClInclude Include="text_encode.h">
       <Filter>源文件\until</Filter>
     </ClInclude>
-    <ClInclude Include="v8context.h">
-      <Filter>源文件\v8_vm\v8context</Filter>
+    <ClInclude Include="v8inject.h">
+      <Filter>源文件\v8_vm\v8inject</Filter>
     </ClInclude>
     <ClInclude Include="v8time.h">
       <Filter>源文件\v8_vm\v8time</Filter>
     </ClInclude>
     <ClInclude Include="TimeoutTask.h">
       <Filter>源文件\v8_vm\v8time</Filter>
+    </ClInclude>
+    <ClInclude Include="v8context.h">
+      <Filter>源文件\v8_vm\v8context</Filter>
+    </ClInclude>
+    <ClInclude Include="v8print.h">
+      <Filter>源文件\v8_vm\v8print</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
