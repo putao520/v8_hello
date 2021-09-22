@@ -16,10 +16,17 @@ public:
 
 	void setup(Local<ObjectTemplate>);
 
-	static v8time* New(Isolate* isolate);
+	unsigned int task_inc();
+
+	void runner_inc();
+
+	bool isEmpty();
+
+	static v8time* current(Isolate* isolate);
 private:
 	
-	static atomic<unsigned int> taskId;
+	atomic<unsigned int> taskId;
+	atomic<unsigned int> runnerId;
 
 	Isolate* _isolate;
 

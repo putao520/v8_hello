@@ -27,6 +27,6 @@ void v8print::setup(Local<ObjectTemplate> global) {
 }
 
 // ×¢ÒâÄÚ´æĞ¹Â©
-v8print* v8print::New(Isolate* isolate) {
+v8print* v8print::current(Isolate* isolate) {
 	return global_v8t ? global_v8t : new v8print(isolate);
 }

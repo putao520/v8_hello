@@ -13,7 +13,7 @@ public:
 	~v8print();
 	void setup(Local<ObjectTemplate>);
 
-	static v8print* New(Isolate* isolate);
+	static v8print* current(Isolate* isolate);
 
 private:
 	Isolate* _isolate;

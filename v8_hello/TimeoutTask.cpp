@@ -1,9 +1,11 @@
 #include "TimeoutTask.h"
+#include "v8time.h"
 
 
 void TimeoutTask::Run() {
 	// printf("test it!\n");
 	this->pfn();
+	v8time::current(_isolate)->runner_inc();
 }
 
 TimeoutTask* TimeoutTask::setTask(const function<void()>&& fn) {

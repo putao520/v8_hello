@@ -31,6 +31,15 @@
     <Filter Include="源文件\v8_vm\v8print">
       <UniqueIdentifier>{24826826-01a5-4d38-9602-2f559f3ec5f3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="源文件\until\queue_ring">
+      <UniqueIdentifier>{000220d9-bc22-4c76-a2a5-a3f255ecdd99}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\v8_vm\v8time\setTimeout">
+      <UniqueIdentifier>{8b2c0254-06fd-4dcd-afe4-7cf48eb53f17}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\v8_vm\v8time\interval">
+      <UniqueIdentifier>{0396157f-021f-4738-8ad1-8c2c264db8d4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="v8_hello.cpp">
@@ -51,17 +60,29 @@
     <ClCompile Include="v8inject.cpp">
       <Filter>源文件\v8_vm\v8inject</Filter>
     </ClCompile>
-    <ClCompile Include="v8time.cpp">
-      <Filter>源文件\v8_vm\v8time</Filter>
-    </ClCompile>
-    <ClCompile Include="TimeoutTask.cpp">
-      <Filter>源文件\v8_vm\v8time</Filter>
-    </ClCompile>
     <ClCompile Include="v8context.cpp">
       <Filter>源文件\v8_vm\v8context</Filter>
     </ClCompile>
     <ClCompile Include="v8print.cpp">
       <Filter>源文件\v8_vm\v8print</Filter>
+    </ClCompile>
+    <ClCompile Include="queue_ring.cpp">
+      <Filter>源文件\until\queue_ring</Filter>
+    </ClCompile>
+    <ClCompile Include="queue_ring_exception.cpp">
+      <Filter>源文件\until\queue_ring</Filter>
+    </ClCompile>
+    <ClCompile Include="v8time.cpp">
+      <Filter>源文件\v8_vm\v8time\setTimeout</Filter>
+    </ClCompile>
+    <ClCompile Include="TimeoutTask.cpp">
+      <Filter>源文件\v8_vm\v8time\setTimeout</Filter>
+    </ClCompile>
+    <ClCompile Include="v8interval.cpp">
+      <Filter>源文件\v8_vm\v8time\interval</Filter>
+    </ClCompile>
+    <ClCompile Include="IntervalTask.cpp">
+      <Filter>源文件\v8_vm\v8time\interval</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -80,17 +101,34 @@
     <ClInclude Include="v8inject.h">
       <Filter>源文件\v8_vm\v8inject</Filter>
     </ClInclude>
-    <ClInclude Include="v8time.h">
-      <Filter>源文件\v8_vm\v8time</Filter>
-    </ClInclude>
-    <ClInclude Include="TimeoutTask.h">
-      <Filter>源文件\v8_vm\v8time</Filter>
-    </ClInclude>
     <ClInclude Include="v8context.h">
       <Filter>源文件\v8_vm\v8context</Filter>
     </ClInclude>
     <ClInclude Include="v8print.h">
       <Filter>源文件\v8_vm\v8print</Filter>
     </ClInclude>
+    <ClInclude Include="queue_ring.h">
+      <Filter>源文件\until\queue_ring</Filter>
+    </ClInclude>
+    <ClInclude Include="queue_ring_exception.h">
+      <Filter>源文件\until\queue_ring</Filter>
+    </ClInclude>
+    <ClInclude Include="v8time.h">
+      <Filter>源文件\v8_vm\v8time\setTimeout</Filter>
+    </ClInclude>
+    <ClInclude Include="TimeoutTask.h">
+      <Filter>源文件\v8_vm\v8time\setTimeout</Filter>
+    </ClInclude>
+    <ClInclude Include="v8interval.h">
+      <Filter>源文件\v8_vm\v8time\interval</Filter>
+    </ClInclude>
+    <ClInclude Include="IntervalTask.h">
+      <Filter>源文件\v8_vm\v8time\interval</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="build.txt">
+      <Filter>源文件</Filter>
+    </Text>
   </ItemGroup>
 </Project>

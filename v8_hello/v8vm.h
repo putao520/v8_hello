@@ -4,6 +4,8 @@
 #include <include/libplatform/libplatform.h>
 #include <include/v8.h>
 #include "v8context.h"
+#include <chrono>
+#include <thread>
 
 using namespace v8;
 using namespace std;
@@ -18,7 +20,7 @@ public:
 	~v8vm();
 	v8vm&& script(const char* script);
 	v8vm&& load(const char* file);
-
+	v8vm&& from(const char* uri);
 	template<typename T>
 	T exec() {
 		T r;
@@ -85,7 +87,10 @@ public:
 						r = static_cast<float>(result->NumberValue(_context).ToChecked());
 					}
 
-					platform::PumpMessageLoop(g_default_platform.get(), _isolate, platform::MessageLoopBehavior::kWaitForWork);
+					// 等待任务执行
+					this->wait();
+					// 等待异步任务执行
+					
 				}
 			}
 		}
@@ -96,9 +101,12 @@ public:
 	v8vm(const v8vm& that);
 	v8vm(const v8vm&& that) noexcept;
 	
+	// 等待当前隔离对象所有异步对象和异步是否为空
+	v8vm* wait();
+
+	static vector<Isolate*> getAllIsolate();
 private:
 	Isolate* buildIsolate();
-	
 
 	unique_ptr<Isolate::CreateParams> p_create_params;
 	Isolate* _isolate;

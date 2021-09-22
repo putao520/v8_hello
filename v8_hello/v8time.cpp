@@ -1,16 +1,16 @@
 #include "v8time.h"
 #include "TimeoutTask.h"
-#include <functional>
 #include "v8callback.h"
 #include "v8context.h"
+#include <unordered_map>
+#include <functional>
 
-v8time* global_v8t = nullptr;
+using namespace std;
 
-atomic<unsigned int> taskId(0);
+// 多隔离环境支持
+unordered_map<Isolate*, v8time*> time_map;
 extern unique_ptr<Platform> g_default_platform;
-
 void SetTimeout(const FunctionCallbackInfo<v8::Value>& args);
-
 v8time::v8time(Isolate* isolate): 
 	_isolate(isolate){
 }
@@ -26,8 +26,23 @@ void v8time::setup(Local<ObjectTemplate> global) {
 	);
 }
 
-v8time* v8time::New(Isolate* isolate) {
-	return global_v8t ? global_v8t : new v8time(isolate);
+v8time* v8time::current(Isolate* isolate) {
+	if (!time_map.contains(isolate))
+		time_map[isolate] = new v8time(isolate);
+	return time_map[isolate];
+}
+
+unsigned int v8time::task_inc() {
+	taskId++;
+	return taskId;
+}
+
+void v8time::runner_inc() {
+	runnerId++;
+}
+
+bool v8time::isEmpty() {
+	return taskId <= runnerId;
 }
 /**
 * SetTimeout
@@ -36,7 +51,8 @@ v8time* v8time::New(Isolate* isolate) {
 unsigned int SetTimeoutImpl(Isolate* isolate, const FunctionCallbackInfo<v8::Value>& args) {
 	
 	if (args.Length() == 0 || !args[0]->IsFunction()) return 0;
-	taskId++;
+	
+	auto taskId = v8time::current(isolate)->task_inc();
 
 	// 此处上下文没有问题
 	double delay = 0.0;
